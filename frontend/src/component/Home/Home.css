@@ -3,10 +3,12 @@
   height: 100vmin;
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   color: white;
   text-align: center;
+  /* border: 2px solid red; */
 }
 
 .banner >h1{
@@ -37,7 +39,7 @@
   color: white;
 }
 
-.banner::after{
+/* .banner::after{
 content: "";
 width: 100vw;
 height: 100vmin;
@@ -47,7 +49,8 @@ top: 0%;
 left: 0;
 clip-path: polygon(100% 73%, 0% 100%, 100% 100%);
 max-width: 100%;
-}
+
+} */
 
 .homeHeading{
   text-align: center;

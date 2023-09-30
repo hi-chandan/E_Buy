@@ -1,44 +1,72 @@
 import React from "react";
-import {ReactNavbar} from "overlay-navbar"
-import logo  from '../../../assets/react.svg'
-
-
-const options = {
-  burgerColorHover: "#eb4034",
-  logo,
-  logoWidth: "20vmax",
-  navColor1: "white",
-  logoHoverSize: "10px",
-  logoHoverColor: "#eb4034",
-  link1Text: "Home",
-  link2Text: "Products",
-  link3Text: "Contact",
-  link4Text: "About",
-  link1Url: "/",
-  link2Url: "/products",
-  link3Url: "/contact",
-  link4Url: "/about",
-  link1Size: "1.3vmax",
-  link1Color: "rgba(35, 35, 35,0.8)",
-  nav1justifyContent: "flex-end",
-  nav2justifyContent: "flex-end",
-  nav3justifyContent: "flex-start",
-  nav4justifyContent: "flex-start",
-  link1ColorHover: "#eb4034",
-  link1Margin: "1vmax",
-  profileIconUrl: "/login",
-  profileIconColor: "rgba(35, 35, 35,0.8)",
-  searchIconColor: "rgba(35, 35, 35,0.8)",
-  cartIconColor: "rgba(35, 35, 35,0.8)",
-  profileIconColorHover: "#eb4034",
-  searchIconColorHover: "#eb4034",
-  cartIconColorHover: "#eb4034",
-  cartIconMargin: "1vmax",
-};
+import { ReactNavbar } from "overlay-navbar";
+import logo from "../../../assets/react.svg";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 const Header = () => {
-  return <>
-  <ReactNavbar {...options}/>
-  </>;
+  const navigate = useNavigate();
+  const [keyword, setKeyword] = useState("");
+
+  const searchSubmitHandler = (e) => {
+    e.preventDefault();
+    if (keyword.trim()) {
+      navigate(`/products/${keyword}`);
+    } else {
+      navigate("/products");
+    }
+  };
+  return (
+    <nav class="navbar navbar-expand-lg  ">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src={logo} alt="" srcset="" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">
+                Home
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/products">
+                products
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link disabled" aria-disabled="true">
+                Disabled
+              </a>
+            </li>
+          </ul>
+          <form class="d-flex " role="search" onSubmit={searchSubmitHandler}>
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+              onChange={(e) => setKeyword(e.target.value)}
+            />
+            <input type="submit" value="Search" className="btn btn-primary" />
+          </form>
+        </div>
+      </div>
+    </nav>
+  );
 };
 
 export default Header;
