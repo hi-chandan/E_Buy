@@ -4,7 +4,7 @@ import logo from "../../../assets/react.svg";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const Header = () => {
   const navigate = useNavigate();
   const [keyword, setKeyword] = useState("");
@@ -37,14 +37,20 @@ const Header = () => {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">
+              <Link to="/" aria-current="page" className="nav-link active">
                 Home
-              </a>
+              </Link>
+            </li>
+
+            <li class="nav-item">
+              <Link to="/products" className="nav-link active">
+                products
+              </Link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/products">
-                products
-              </a>
+              <Link to="/login" className="nav-link active">
+                Login
+              </Link>
             </li>
 
             <li class="nav-item">

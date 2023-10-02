@@ -6,7 +6,7 @@ import { getproductDetail } from "../../actions/productActions";
 import { useParams } from "react-router-dom";
 import Carousel from "react-material-ui-carousel";
 import ReactStars from "react-rating-stars-component";
-
+import MetaData from "../layout/MetaData";
 const ProductDetails = ({ match }) => {
   const id = useParams();
   const dispatch = useDispatch();
@@ -27,6 +27,7 @@ const ProductDetails = ({ match }) => {
   };
   return (
     <Fragment>
+      <MetaData title={`${product.name} -- ECOMMERCE`} />
       <div className="ProductDetails">
         <div>
           <Carousel>
