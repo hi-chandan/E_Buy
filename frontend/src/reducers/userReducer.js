@@ -125,3 +125,23 @@ export const userLoader = createSlice({
     });
   },
 });
+
+export const userLogout = createSlice({
+  name: "user",
+  initialState,
+  extraReducers: (builder) => {
+    builder.addCase(LOGOUT_SUCCESS, (state, action) => {
+      state.loading = false;
+      state.user = null;
+      state.isAuthenticated = false;
+    });
+    builder.addCase(LOGOUT_FAIL, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+
+    builder.addCase(CLEAR_ERRORS, (state) => {
+      state.error = null;
+    });
+  },
+});

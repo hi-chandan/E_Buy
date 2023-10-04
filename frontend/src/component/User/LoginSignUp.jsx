@@ -6,18 +6,23 @@ import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import FaceIcon from "@material-ui/icons/Face";
 import { useDispatch, useSelector } from "react-redux";
-import { login, register } from "../../actions/userAction";
+import { login, register, clearErrors } from "../../actions/userAction";
 import { useAlert } from "react-alert";
 import { useNavigate } from "react-router-dom";
+// import { userLoader } from "../../reducers/userReducer";
 const LoginSignUp = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const alert = useAlert();
 
-  const { error, loading, isAuthenticated } = useSelector((state) => {
-    return state.user;
+  const { error, isAuthenticated } = useSelector((state) => {
+    if (state.user.isAuthenticated) {
+      return state.user;
+    } else {
+      return state.userLoader;
+    }
   });
-  console.log("isAuthticated...", isAuthenticated);
+
   const loginTab = useRef(null);
   const registerTab = useRef(null);
   const switcherTab = useRef(null);
@@ -70,7 +75,7 @@ const LoginSignUp = () => {
   };
 
   // const redirect = location.search ? location.search.split("=")[1] : "/account";
-
+  console.log("register... auth", isAuthenticated);
   useEffect(() => {
     if (error) {
       alert.error(error);

@@ -1,14 +1,20 @@
 import { configureStore } from "@reduxjs/toolkit";
 import logger from "redux-logger";
 import { ProductdetailsReducer, gitProduct } from "./reducers/productReducer";
-import { userLoader, userReducer, userRegister } from "./reducers/userReducer";
+import {
+  userLoader,
+  userLogout,
+  userReducer,
+  userRegister,
+} from "./reducers/userReducer";
 
 const reducer = {
   product: gitProduct.reducer,
   productDetail: ProductdetailsReducer.reducer,
-  user: userReducer.reducer,
   userRegister: userRegister.reducer,
+  user: userReducer.reducer,
   userLoader: userLoader.reducer,
+  userLogout: userLogout.reducer,
 };
 
 const store = configureStore({
