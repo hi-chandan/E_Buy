@@ -12,18 +12,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "./actions/userAction";
 import UserOptions from "./component/layout/Header/UserOptions.jsx";
 import Profile from "./component/User/Profile.jsx";
+import ProtectAPI from "./component/Routers/ProtectAPI";
 function App() {
   const { isAuthenticated, user } = useSelector((state) => {
-    if (state.user.isAuthenticated) {
-      return state.user;
-    } else {
-      return state.userLoader;
-    }
+    return state.user;
   });
+  console.log("isAuthenticated...", isAuthenticated);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadUser());
-  }, []);
+  }, [dispatch]);
   return (
     <>
       <Header />
@@ -32,9 +30,9 @@ function App() {
         <Route extact path="/" Component={Home} />
         <Route extact path="/product/:id" Component={ProductDetails} />
         <Route extact path="/products" Component={Products} />
-        {isAuthenticated && (
-          <Route extact path="/account" Component={Profile} />
-        )}
+
+        <Route path="/account" element={<ProtectAPI Component={Profile} />} />
+
         <Route path="/products/:keyword" Component={Products} />
 
         <Route path="/login" Component={LoginSignUp} />

@@ -9,18 +9,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { login, register, clearErrors } from "../../actions/userAction";
 import { useAlert } from "react-alert";
 import { useNavigate } from "react-router-dom";
-// import { userLoader } from "../../reducers/userReducer";
 const LoginSignUp = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const alert = useAlert();
 
   const { error, isAuthenticated } = useSelector((state) => {
-    if (state.user.isAuthenticated) {
-      return state.user;
-    } else {
-      return state.userLoader;
-    }
+    return state.user;
   });
 
   const loginTab = useRef(null);
@@ -75,7 +70,6 @@ const LoginSignUp = () => {
   };
 
   // const redirect = location.search ? location.search.split("=")[1] : "/account";
-  console.log("register... auth", isAuthenticated);
   useEffect(() => {
     if (error) {
       alert.error(error);
@@ -188,6 +182,7 @@ const LoginSignUp = () => {
                 onChange={registerDataChange}
               />
             </div>
+            <p>{error}j</p>
             <input type="submit" value="Register" className="signUpBtn" />
           </form>
         </div>

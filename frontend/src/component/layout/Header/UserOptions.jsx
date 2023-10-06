@@ -56,7 +56,7 @@ const UserOptions = ({ user }) => {
   }
   function logoutUser() {
     dispatch(logout());
-    alert.success("Logout Successfully");
+    alert("Logout Successfully");
   }
   return (
     <Fragment>

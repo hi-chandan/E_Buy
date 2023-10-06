@@ -1,26 +1,26 @@
-import React, { Fragment, useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import { useSelector } from "react-redux";
 import MetaData from "../layout/MetaData";
 import Loader from "../layout/Loader/Loder";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./Profile.css";
+
 const Profile = () => {
-  const navigater = useNavigate();
-  const { user, loading, isAuthenticated } = useSelector((state) => {
-    if (state.user.isAuthenticated) {
+  const navigate = useNavigate();
+  const { user, loading, isAuthenticated, userlogout } = useSelector(
+    (state) => {
       return state.user;
-    } else {
-      return state.userLoader;
     }
-  });
-  console.log("userimage...", user.avatar.url);
+  );
+
+  console.log("userimage...", isAuthenticated);
 
   useEffect(() => {
     if (isAuthenticated === false) {
-      navigater("/login");
+      navigate("/login");
     }
-  }, []);
+  }, [navigate, isAuthenticated]);
 
   return (
     <Fragment>

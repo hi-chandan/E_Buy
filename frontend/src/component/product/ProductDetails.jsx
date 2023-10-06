@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import Carousel from "react-material-ui-carousel";
 import ReactStars from "react-rating-stars-component";
 import MetaData from "../layout/MetaData";
-const ProductDetails = ({ match }) => {
+const ProductDetails = () => {
   const id = useParams();
   const dispatch = useDispatch();
   const { loading, product, error } = useSelector((state) => {
