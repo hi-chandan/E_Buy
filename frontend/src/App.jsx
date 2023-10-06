@@ -13,6 +13,7 @@ import { loadUser } from "./actions/userAction";
 import UserOptions from "./component/layout/Header/UserOptions.jsx";
 import Profile from "./component/User/Profile.jsx";
 import ProtectAPI from "./component/Routers/ProtectAPI";
+import UpdateProfile from "./component/User/UpdateProfile.jsx";
 function App() {
   const { isAuthenticated, user } = useSelector((state) => {
     return state.user;
@@ -32,6 +33,10 @@ function App() {
         <Route extact path="/products" Component={Products} />
 
         <Route path="/account" element={<ProtectAPI Component={Profile} />} />
+        <Route
+          path="/me/update"
+          element={<ProtectAPI Component={UpdateProfile} />}
+        />
 
         <Route path="/products/:keyword" Component={Products} />
 

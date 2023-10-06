@@ -176,11 +176,20 @@ exports.updatePassword = catchAsyncError(async (req, res, next) => {
 
 // update User profile
 exports.updateProfile = catchAsyncError(async (req, res, next) => {
+  const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    folder: "avatar",
+    width: 150,
+    crop: "scale",
+  });
+
   const newUserData = {
     name: req.body.name,
     email: req.body.email,
+    avatar: {
+      public_id: myCloud.public_id,
+      url: myCloud.secure_url,
+    },
   };
-
   // we will add cloudinary later
 
   const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
@@ -188,6 +197,7 @@ exports.updateProfile = catchAsyncError(async (req, res, next) => {
     runValidators: true,
     useFindAndModify: false,
   });
+
   res.status(200).json({
     success: true,
     message: "name and email is updated",

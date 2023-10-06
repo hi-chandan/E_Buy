@@ -108,11 +108,15 @@ export const updateProfile = (userData) => async (dispatch) => {
 
     const { data } = await axios.put(`/api/v1/me/update`, userData, config);
 
-    dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: data.success });
+    dispatch({
+      type: UPDATE_PROFILE_SUCCESS,
+      payload: data.success,
+      message: data.message,
+    });
   } catch (error) {
     dispatch({
       type: UPDATE_PROFILE_FAIL,
-      payload: error.response.data.message,
+      error: error.response.data.message,
     });
   }
 };

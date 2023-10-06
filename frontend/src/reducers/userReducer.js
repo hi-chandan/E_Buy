@@ -119,74 +119,33 @@ export const userReducer = createSlice({
     });
   },
 });
-// export const userRegister = createSlice({
-//   name: "user",
-//   initialState,
-//   extraReducers: (builder) => {
-//     builder.addCase(REGISTER_USER_REQUEST, (state, action) => {
-//       state.loading = true;
-//       state.isAuthenticated = false;
-//     });
 
-//     builder.addCase(REGISTER_USER_SUCCESS, (state, action) => {
-//       state.loading = false;
-//       state.user = action.payload;
-//       state.isAuthenticated = true;
-//     });
-//     builder.addCase(REGISTER_USER_FAIL, (state, action) => {
-//       state.loading = false;
-//       state.error = action.payload;
-//       state.isAuthenticated = false;
-//     });
+// update user
 
-//     builder.addCase(CLEAR_ERRORS, (state) => {
-//       state.error = null;
-//     });
-//   },
-// });
+export const updateReducer = createSlice({
+  name: "userupdate",
+  initialState,
+  extraReducers: (builder) => {
+    builder.addCase(UPDATE_PROFILE_REQUEST, (state, action) => {
+      state.loading = true;
+    });
+    /// log out user
+    builder.addCase(UPDATE_PROFILE_SUCCESS, (state, action) => {
+      state.loading = false;
+      state.user = null;
+      state.isUpdated = action.payload;
+      state.message = action.message;
+    });
+    builder.addCase(UPDATE_PROFILE_FAIL, (state, action) => {
+      state.loading = false;
+      state.error = action.error;
+    });
+    builder.addCase(UPDATE_PROFILE_RESET, (state, action) => {
+      state.isUpdated = false;
+    });
 
-// export const userLoader = createSlice({
-//   name: "user",
-//   initialState,
-//   extraReducers: (builder) => {
-//     builder.addCase(LOAD_USER_REQUEST, (state, action) => {
-//       state.loading = true;
-//       state.isAuthenticated = false;
-//     });
-
-//     builder.addCase(LOAD_USER_SUCCESS, (state, action) => {
-//       state.loading = false;
-//       state.user = action.payload;
-//       state.isAuthenticated = true;
-//     });
-//     builder.addCase(LOAD_USER_FAIL, (state, action) => {
-//       state.loading = false;
-//       state.error = action.payload;
-//       state.isAuthenticated = false;
-//     });
-
-//     builder.addCase(CLEAR_ERRORS, (state) => {
-//       state.error = null;
-//     });
-//   },
-// });
-
-// export const userLogout = createSlice({
-//   name: "user",
-//   initialState,
-//   extraReducers: (builder) => {
-//     builder.addCase(LOGOUT_SUCCESS, (state, action) => {
-//       state.loading = false;
-//       state.user = null;
-//       (state.isAuthenticated = false), (state.userlogout = false);
-//     });
-//     builder.addCase(LOGOUT_FAIL, (state, action) => {
-//       state.loading = false;
-//       state.error = action.payload;
-//     });
-
-//     builder.addCase(CLEAR_ERRORS, (state) => {
-//       state.error = null;
-//     });
-//   },
-// });
+    builder.addCase(CLEAR_ERRORS, (state) => {
+      state.error = null;
+    });
+  },
+});
