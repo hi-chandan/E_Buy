@@ -19,7 +19,7 @@ const UpdateProfile = () => {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [avatar, setAvatar] = useState();
+  const [avatar, setAvatar] = useState("");
   const [avatarPreview, setAvatarPreview] = useState("/Profile.png");
 
   const updateProfileSubmit = (e) => {
@@ -52,7 +52,6 @@ const UpdateProfile = () => {
       setEmail(user.email);
       setAvatarPreview(user.avatar.url);
     }
-    console.log("profile ....", isUpdated);
     if (error) {
       alert.error(error);
       dispatch(clearErrors());

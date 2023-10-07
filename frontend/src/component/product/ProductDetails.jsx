@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Fragment } from "react";
 import "../product/ProductDetail.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +9,7 @@ import ReactStars from "react-rating-stars-component";
 import MetaData from "../layout/MetaData";
 const ProductDetails = () => {
   const id = useParams();
+  const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
   const { loading, product, error } = useSelector((state) => {
     return state.productDetail;
@@ -57,14 +58,13 @@ const ProductDetails = () => {
             <div className="detailsBlock-3-1">
               <div className="detailsBlock-3-1-1">
                 <button>-</button>
-                <input value="1" type="number" />
+                <input readOnly type="number" value={quantity} />
                 <button>+</button>
               </div>
-              {""}
+
               <button>Add to Cart</button>
             </div>
             <p>
-              Status:{""}
               <b className={product.Stock < 1 ? "redColor" : "greenColor"}>
                 {product.Stock < 1 ? "OutOfStock" : "InStock"}
               </b>

@@ -158,13 +158,13 @@ exports.updatePassword = catchAsyncError(async (req, res, next) => {
 
   const isPasswordMatch = await user.comparePassword(req.body.oldPassword);
   if (!isPasswordMatch) {
-    return res.status(200).json({
+    return res.status(501).json({
       success: false,
       message: "oldpassword is incorrect",
     });
   }
   if (req.body.newPassword !== req.body.confirmPassword) {
-    return res.status(200).json({
+    return res.status(501).json({
       success: false,
       message: "Password don't match",
     });
@@ -176,21 +176,29 @@ exports.updatePassword = catchAsyncError(async (req, res, next) => {
 
 // update User profile
 exports.updateProfile = catchAsyncError(async (req, res, next) => {
-  const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
-    folder: "avatar",
-    width: 150,
-    crop: "scale",
-  });
-
   const newUserData = {
     name: req.body.name,
     email: req.body.email,
-    avatar: {
+  };
+
+  if (req.body.avatar !== "") {
+    const user = await User.findById(req.user.id);
+
+    const imageId = user.avatar.public_id;
+
+    await cloudinary.v2.uploader.destroy(imageId);
+
+    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+      folder: "avatars",
+      width: 150,
+      crop: "scale",
+    });
+
+    newUserData.avatar = {
       public_id: myCloud.public_id,
       url: myCloud.secure_url,
-    },
-  };
-  // we will add cloudinary later
+    };
+  }
 
   const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
     new: true,
@@ -200,7 +208,7 @@ exports.updateProfile = catchAsyncError(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    message: "name and email is updated",
+    message: "Succefull update",
   });
 });
 

@@ -14,6 +14,9 @@ import UserOptions from "./component/layout/Header/UserOptions.jsx";
 import Profile from "./component/User/Profile.jsx";
 import ProtectAPI from "./component/Routers/ProtectAPI";
 import UpdateProfile from "./component/User/UpdateProfile.jsx";
+import UpdatePassword from "./component/User/UpdatePassword.jsx";
+import ForgotPassword from "./component/User/ForgotPassword.jsx";
+import ResetPassword from "./component/User/ResetPassword.jsx";
 function App() {
   const { isAuthenticated, user } = useSelector((state) => {
     return state.user;
@@ -37,9 +40,14 @@ function App() {
           path="/me/update"
           element={<ProtectAPI Component={UpdateProfile} />}
         />
+        <Route
+          path="/password/update"
+          element={<ProtectAPI Component={UpdatePassword} />}
+        />
 
+        <Route path="/password/forgot" Component={ForgotPassword} />
         <Route path="/products/:keyword" Component={Products} />
-
+        <Route exact path="/password/reset/:token" Component={ResetPassword} />
         <Route path="/login" Component={LoginSignUp} />
         <Route path="/search" Component={Search} />
       </Routes>

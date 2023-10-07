@@ -129,12 +129,11 @@ export const updateReducer = createSlice({
     builder.addCase(UPDATE_PROFILE_REQUEST, (state, action) => {
       state.loading = true;
     });
-    /// log out user
+
     builder.addCase(UPDATE_PROFILE_SUCCESS, (state, action) => {
       state.loading = false;
-      state.user = null;
       state.isUpdated = action.payload;
-      state.message = action.message;
+      state.user = null;
     });
     builder.addCase(UPDATE_PROFILE_FAIL, (state, action) => {
       state.loading = false;
@@ -142,6 +141,72 @@ export const updateReducer = createSlice({
     });
     builder.addCase(UPDATE_PROFILE_RESET, (state, action) => {
       state.isUpdated = false;
+    });
+
+    builder.addCase(CLEAR_ERRORS, (state) => {
+      state.error = null;
+    });
+  },
+});
+
+export const userPassword = createSlice({
+  name: "userupdate",
+  initialState,
+  extraReducers: (builder) => {
+    builder.addCase(UPDATE_PASSWORD_REQUEST, (state, action) => {
+      state.loading = true;
+    });
+
+    builder.addCase(UPDATE_PASSWORD_SUCCESS, (state, action) => {
+      state.loading = false;
+      state.isUpdated = action.payload;
+      state.user = null;
+    });
+    builder.addCase(UPDATE_PASSWORD_FAIL, (state, action) => {
+      state.loading = false;
+      state.error = action.error;
+    });
+    builder.addCase(UPDATE_PASSWORD_RESET, (state, action) => {
+      state.isUpdated = false;
+    });
+
+    builder.addCase(CLEAR_ERRORS, (state) => {
+      state.error = null;
+    });
+  },
+});
+
+export const resetPasswordReducer = createSlice({
+  name: "userupdate",
+  initialState,
+  extraReducers: (builder) => {
+    builder.addCase(RESET_PASSWORD_REQUEST, (state, action) => {
+      state.loading = true;
+    });
+
+    builder.addCase(RESET_PASSWORD_SUCCESS, (state, action) => {
+      state.loading = false;
+      state.message = action.payload;
+      state.user = null;
+    });
+    builder.addCase(RESET_PASSWORD_FAIL, (state, action) => {
+      state.loading = false;
+      state.error = action.error;
+    });
+
+    // forget password
+    builder.addCase(FORGOT_PASSWORD_REQUEST, (state, action) => {
+      state.loading = true;
+    });
+
+    builder.addCase(FORGOT_PASSWORD_SUCCESS, (state, action) => {
+      state.loading = false;
+      state.success = action.payload;
+      state.user = null;
+    });
+    builder.addCase(FORGOT_PASSWORD_FAIL, (state, action) => {
+      state.loading = false;
+      state.error = action.error;
     });
 
     builder.addCase(CLEAR_ERRORS, (state) => {
