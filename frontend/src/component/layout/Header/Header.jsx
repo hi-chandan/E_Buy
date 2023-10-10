@@ -10,7 +10,6 @@ const Header = () => {
   const [keyword, setKeyword] = useState("");
 
   const searchSubmitHandler = (e) => {
-    e.preventDefault();
     if (keyword.trim()) {
       navigate(`/products/${keyword}`);
     } else {
@@ -52,11 +51,10 @@ const Header = () => {
                 Login
               </Link>
             </li>
-
             <li class="nav-item">
-              <a class="nav-link disabled" aria-disabled="true">
-                Disabled
-              </a>
+              <Link to="/cart" className="nav-link active">
+                cart
+              </Link>
             </li>
           </ul>
           <form class="d-flex " role="search" onSubmit={searchSubmitHandler}>

@@ -82,10 +82,10 @@
 .detailsBlock-3-1-1>input {
   border: none;
   padding: 0.5vmax;
-  width: 1vmax;
+  width: 3vmax;
   text-align: center;
   outline: none;
-  font: 400 0.8vmax "Roboto";
+  font: 400 1/5vmax "Roboto";
   color: rgba(0, 0, 0, 0.74);
 }
 
@@ -293,4 +293,3 @@
     font: 300 5vw cursive;
   }
 }
-

@@ -6,14 +6,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, forgotPassword } from "../../actions/userAction";
 import { useAlert } from "react-alert";
 import MetaData from "../layout/MetaData";
+import { useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
+  const navigate = useNavigate();
 
-  const { error, message, loading } = useSelector((state) => {
+  const { error, success, loading } = useSelector((state) => {
     return state.forgotpassword;
   });
+  console.log("this is error in forgotpassword..", error);
 
   const [email, setEmail] = useState("");
 
@@ -27,15 +30,16 @@ const ForgotPassword = () => {
   };
 
   useEffect(() => {
-    // if (error) {
-    //   alert.error(error);
-    //   dispatch(clearErrors());
-    // }
-
-    if (message) {
-      alert.success(message);
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
     }
-  }, [dispatch, alert, message]);
+
+    if (success) {
+      navigate("/login");
+      alert.success(success);
+    }
+  }, [dispatch, error, success, alert]);
 
   return (
     <Fragment>

@@ -8,10 +8,11 @@ import FaceIcon from "@material-ui/icons/Face";
 import { useDispatch, useSelector } from "react-redux";
 import { login, register, clearErrors } from "../../actions/userAction";
 import { useAlert } from "react-alert";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 const LoginSignUp = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
   const alert = useAlert();
 
   const { error, isAuthenticated } = useSelector((state) => {
@@ -69,7 +70,7 @@ const LoginSignUp = () => {
     }
   };
 
-  // const redirect = location.search ? location.search.split("=")[1] : "/account";
+  const redirect = location.search ? location.search.split("=")[1] : "/account";
   useEffect(() => {
     if (error) {
       alert.error(error);
@@ -77,9 +78,9 @@ const LoginSignUp = () => {
     }
 
     if (isAuthenticated) {
-      navigate("/account");
+      navigate(redirect);
     }
-  }, [dispatch, error, alert, isAuthenticated]);
+  }, [dispatch, error, alert, isAuthenticated, redirect]);
 
   const switchTabs = (e, tab) => {
     if (tab === "login") {
@@ -182,7 +183,7 @@ const LoginSignUp = () => {
                 onChange={registerDataChange}
               />
             </div>
-            <p>{error}j</p>
+            <p>{error}</p>
             <input type="submit" value="Register" className="signUpBtn" />
           </form>
         </div>

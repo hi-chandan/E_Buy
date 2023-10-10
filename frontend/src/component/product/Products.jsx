@@ -28,7 +28,7 @@ const Products = () => {
   const { keyword } = useParams();
   const dispatch = useDispatch();
   const { loading, product, error } = useSelector((state) => {
-    return state.product;
+    return state.products;
   });
   const setCurrentPageNo = (e) => {
     setCurrentPage(e);

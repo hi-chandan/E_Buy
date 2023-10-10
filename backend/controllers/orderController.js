@@ -26,6 +26,12 @@ exports.newOrder = catchAsyncError(async (req, res, next) => {
     paidAt: Date.now(),
     user: req.user._id,
   });
+  if (!order) {
+    res.status(201).json({
+      success: false,
+      message: "order is not placed",
+    });
+  }
 
   res.status(201).json({
     success: true,

@@ -15,8 +15,8 @@ const ResetPassword = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
 
-  const { error, success, loading } = useSelector(
-    (state) => state.forgotPassword
+  const { error, message, loading } = useSelector(
+    (state) => state.forgotpassword
   );
 
   const [password, setPassword] = useState("");
@@ -39,10 +39,10 @@ const ResetPassword = () => {
       dispatch(clearErrors());
     }
 
-    if (success) {
+    if (message) {
       navigate("/login");
     }
-  }, [dispatch, error, alert, history, success]);
+  }, [dispatch, error, alert, history, message]);
 
   return (
     <Fragment>
