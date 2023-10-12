@@ -1,13 +1,22 @@
-import React from "react";
-import { ReactNavbar } from "overlay-navbar";
+import React, { useState } from "react";
+import "./Header.css";
+import {
+  FaFacebookSquare,
+  // FaInstagramSquare,
+  FaYoutubeSquare,
+} from "react-icons/fa";
+import { GiHamburgerMenu } from "react-icons/gi";
 import logo from "../../../assets/react.svg";
+import { NavLink } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { BsFillCartCheckFill } from "react-icons/bs";
+import { FaCircleUser } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 const Header = () => {
   const navigate = useNavigate();
   const [keyword, setKeyword] = useState("");
+  const [showMediaIcons, setShowMediaIcons] = useState(false);
 
   const searchSubmitHandler = (e) => {
     if (keyword.trim()) {
@@ -17,59 +26,80 @@ const Header = () => {
     }
   };
   return (
-    <nav class="navbar navbar-expand-lg  ">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-          <img src={logo} alt="" srcset="" />
-        </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <Link to="/" aria-current="page" className="nav-link active">
-                Home
-              </Link>
-            </li>
+    <>
+      <nav className="main-nav">
+        {/* 1st logo part  */}
+        <div className="logo">
+          <h2>
+            <img src={logo} alt="" />
+          </h2>
+        </div>
 
-            <li class="nav-item">
-              <Link to="/products" className="nav-link active">
-                products
-              </Link>
+        {/* 2nd menu part  */}
+        <div
+          className={
+            showMediaIcons ? "menu-link mobile-menu-link" : "menu-link"
+          }
+        >
+          <ul>
+            <li>
+              <NavLink to="/">Home</NavLink>
             </li>
-            <li class="nav-item">
-              <Link to="/login" className="nav-link active">
-                Login
-              </Link>
+            <li>
+              <NavLink to="/products">products</NavLink>
             </li>
-            <li class="nav-item">
-              <Link to="/cart" className="nav-link active">
-                cart
-              </Link>
+            <li>
+              <NavLink to="/service">services</NavLink>
+            </li>
+            <li>
+              <NavLink to="/contact">contact</NavLink>
+            </li>
+            <form class="d-flex " role="search" onSubmit={searchSubmitHandler}>
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+                onChange={(e) => setKeyword(e.target.value)}
+              />
+              <input type="submit" value="Search" className="btn btn-primary" />
+            </form>
+          </ul>
+        </div>
+
+        {/* 3rd social media links */}
+        <div className="social-media">
+          <ul className="social-media-desktop">
+            <li>
+              <NavLink to="/cart">
+                <BsFillCartCheckFill size={35} className="cart" />
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/login">
+                <FaCircleUser size={35} className="cart" />
+              </NavLink>
+            </li>
+            <li>
+              <FaYoutubeSquare size={30} className="youtube" />
             </li>
           </ul>
-          <form class="d-flex " role="search" onSubmit={searchSubmitHandler}>
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-              onChange={(e) => setKeyword(e.target.value)}
-            />
-            <input type="submit" value="Search" className="btn btn-primary" />
-          </form>
+
+          {/* hamburget menu start  */}
+          <div className="hamburger-menu">
+            <a href="#" onClick={() => setShowMediaIcons(!showMediaIcons)}>
+              <GiHamburgerMenu />
+            </a>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+
+      {/* hero section  */}
+      {/* <section className="hero-section">
+        <p>Welcome to </p>
+        <h1>Thapa Technical</h1>
+      </section> */}
+    </>
   );
 };
 
