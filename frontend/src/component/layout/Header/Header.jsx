@@ -42,6 +42,24 @@ const Header = () => {
           }
         >
           <ul>
+            <div className="mobilenav">
+              <li>
+                <NavLink to="/cart">
+                  <BsFillCartCheckFill size={35} className="cart" />
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/login">
+                  <FaCircleUser size={35} className="cart" />
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/orders">
+                  <FaYoutubeSquare size={30} className="youtube" />
+                </NavLink>
+              </li>
+            </div>
+
             <li>
               <NavLink to="/">Home</NavLink>
             </li>
@@ -81,7 +99,9 @@ const Header = () => {
               </NavLink>
             </li>
             <li>
-              <FaYoutubeSquare size={30} className="youtube" />
+              <NavLink to="/orders">
+                <FaYoutubeSquare size={30} className="youtube" />
+              </NavLink>
             </li>
           </ul>
 
@@ -93,12 +113,6 @@ const Header = () => {
           </div>
         </div>
       </nav>
-
-      {/* hero section  */}
-      {/* <section className="hero-section">
-        <p>Welcome to </p>
-        <h1>Thapa Technical</h1>
-      </section> */}
     </>
   );
 };

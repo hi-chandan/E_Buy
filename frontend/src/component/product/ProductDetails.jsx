@@ -31,9 +31,9 @@ const ProductDetails = ({ match }) => {
     (state) => state.productDetail
   );
 
-  // const { success, error: reviewError } = useSelector(
-  //   (state) => state.newReview
-  // );
+  const { success, error: reviewError } = useSelector(
+    (state) => state.newReview
+  );
 
   const options = {
     size: "large",
@@ -88,15 +88,15 @@ const ProductDetails = ({ match }) => {
       dispatch(clearErrors());
     }
 
-    // if (reviewError) {
-    //   alert.error(reviewError);
-    //   dispatch(clearErrors());
-    // }
+    if (reviewError) {
+      alert.error(reviewError);
+      dispatch(clearErrors());
+    }
 
-    // if (success) {
-    //   alert.success("Review Submitted Successfully");
-    //   dispatch({ type: NEW_REVIEW_RESET });
-    // }
+    if (success) {
+      alert.success("Review Submitted Successfully");
+      dispatch({ type: NEW_REVIEW_RESET });
+    }
     dispatch(getproductDetail(id.id));
   }, [dispatch, id.id, error, alert]);
 

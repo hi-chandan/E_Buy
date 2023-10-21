@@ -1,15 +1,23 @@
 .speedDial {
   position: fixed;
-  right: 2vmax;
+  right: 4vmax;
   top: 7vmax;
 }
 
 .speedDialIcon {
   width: 56px;
   height: 56px;
+
   border-radius: 100%;
 }
 
+@media only screen and (max-width: 600px) {
+  .speedDial {
+      position: fixed;
+      right: 6vmax;
+      top: 6vmax;
+    }
+}
 
 
 
@@ -303,5 +311,23 @@ li {
 
   .hero-section h1 {
     font-size: 3.8rem;
+  }
+}
+
+
+
+
+
+@media only screen and (min-width: 998px) {
+  .mobilenav {
+    visibility: hidden;
+  }
+}
+@media only screen and (max-width: 998px) {
+.mobilenav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  visibility: inherit;
   }
 }

@@ -23,6 +23,7 @@ const Payment = () => {
   const navigate = useNavigate();
   const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
 
+  console.log("this is order..", orderInfo);
   const dispatch = useDispatch();
   const alert = useAlert();
   const stripe = useStripe();
@@ -35,10 +36,6 @@ const Payment = () => {
   const { user } = useSelector((state) => {
     return state.user;
   });
-  // const { error } = useSelector((state) => {
-  //   console.log("error...", state);
-  //   return state.newOrder;
-  // });
 
   const paymentData = {
     amount: Math.round(orderInfo.totalPrice * 100),

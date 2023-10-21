@@ -1,6 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import logger from "redux-logger";
-import { ProductdetailsReducer, gitProduct } from "./reducers/productReducer";
+import {
+  ProductdetailsReducer,
+  gitProduct,
+  newReviewReducer,
+} from "./reducers/productReducer";
 import {
   resetPasswordReducer,
   updateReducer,
@@ -21,7 +25,7 @@ import {
 } from "./reducers/orderReducer";
 
 const reducer = {
-  products: gitProduct.reducer,
+  products: gitProduct,
   productDetail: ProductdetailsReducer.reducer,
   user: userReducer.reducer,
   profile: updateReducer.reducer,
@@ -33,6 +37,7 @@ const reducer = {
   orderDetails: orderDetailsReducer,
   allOrders: allOrdersReducer,
   order: orderReducer,
+  newReview: newReviewReducer,
 
   // userLoader: userLoader.reducer,
   // userLogout: userLogout.reducer,
