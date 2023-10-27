@@ -7,6 +7,7 @@ import { Typography } from "@material-ui/core";
 import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import MetaData from "../layout/MetaData";
 const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ const Cart = () => {
 
   return (
     <Fragment>
+      <MetaData title="CART" />
       {cartItems.length === 0 ? (
         <div className="emptyCart">
           <RemoveShoppingCartIcon />

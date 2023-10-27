@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login, register, clearErrors } from "../../actions/userAction";
 import { useAlert } from "react-alert";
 import { useNavigate, useLocation } from "react-router-dom";
+import MetaData from "../layout/MetaData";
 const LoginSignUp = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -101,6 +102,7 @@ const LoginSignUp = () => {
 
   return (
     <Fragment>
+      <MetaData title="LOGIN & SIGUP" />
       <div className="LoginSignUpContainer">
         <div className="LoginSignUpBox">
           <div>

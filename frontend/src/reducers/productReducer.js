@@ -55,7 +55,7 @@ export const gitProduct = (state = { product: [] }, action) => {
     case ADMIN_PRODUCT_SUCCESS:
       return {
         loading: false,
-        products: action.payload,
+        product: action.payload,
       };
     case ALL_PRODUCT_FAIL:
     case ADMIN_PRODUCT_FAIL:

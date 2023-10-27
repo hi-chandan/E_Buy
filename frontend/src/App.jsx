@@ -28,7 +28,8 @@ import OrderSuccess from "./component/Cart/OrderSuccess.jsx";
 import Myorders from "./component/Order/MyOrders";
 import ProtectedRoute from "./component/Routers/ProtectRouts";
 import OrderDetails from "./component/Order/OrderDetails.jsx";
-
+import Dashboard from "./component/admin/Dashboard.jsx";
+import NewProduct from "./component/admin/NewProduct";
 function App() {
   const { isAuthenticated, user } = useSelector((state) => {
     return state.user;
@@ -86,6 +87,8 @@ function App() {
           <Route extact path="/orders" element={<Myorders />} />
           <Route extact path="/orders/:id" element={<OrderDetails />} />
         </Route>
+        <Route extact path="/admin/dashboard" element={<Dashboard />} />
+        <Route extact path="/admin/product" element={<NewProduct />} />
         {stripeApiKey && (
           <Route
             path="/process/payment"

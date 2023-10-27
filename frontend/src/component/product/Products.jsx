@@ -7,7 +7,7 @@ import { getProduct } from "../../actions/productActions";
 import { useParams } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import { Typography, Slider } from "@material-ui/core";
-
+import MetaData from "../layout/MetaData";
 const categories = [
   "Laptop",
   "Footwear",
@@ -47,6 +47,7 @@ const Products = () => {
         <Loader />
       ) : (
         <Fragment>
+          <MetaData title="PRODUCT" />
           <h2 className="productsHeading">Products</h2>
           <div className="products">
             {product.product &&

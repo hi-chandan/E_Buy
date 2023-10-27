@@ -3,12 +3,14 @@ import logger from "redux-logger";
 import {
   ProductdetailsReducer,
   gitProduct,
+  newProductReducer,
   newReviewReducer,
 } from "./reducers/productReducer";
 import {
   resetPasswordReducer,
   updateReducer,
   userPassword,
+  allUsersReducer,
   // userLoader,
   // userLogout,
   userReducer,
@@ -38,6 +40,8 @@ const reducer = {
   allOrders: allOrdersReducer,
   order: orderReducer,
   newReview: newReviewReducer,
+  allUsers: allUsersReducer,
+  newProduct: newProductReducer,
 
   // userLoader: userLoader.reducer,
   // userLogout: userLogout.reducer,
