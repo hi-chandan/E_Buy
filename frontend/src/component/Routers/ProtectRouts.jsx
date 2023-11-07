@@ -5,12 +5,12 @@ import { useNavigate, Route, Routes, Outlet } from "react-router-dom";
 const ProtectedRoute = ({ isAdmin, component: Component }) => {
   const { loading, isAuthenticated, user } = useSelector((state) => state.user);
   const navigate = useNavigate();
-
   useEffect(() => {
-    if (isAuthenticated === false) {
+    if (user.role === "user") {
       navigate("/login");
+      return;
     }
-  }, [isAuthenticated]);
+  }, [user.role]);
 
   return <Outlet />;
 };

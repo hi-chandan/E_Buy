@@ -96,6 +96,7 @@ exports.updateOrder = catchAsyncError(async (req, res, next) => {
       message: "order not found",
     });
   }
+
   if (order.orderStatus === "Delivered") {
     return next(
       res.status(404).json({
@@ -105,11 +106,16 @@ exports.updateOrder = catchAsyncError(async (req, res, next) => {
     );
   }
 
-  order.orderItems.forEach(async (o) => {
-    await updateStock(o.product, o.quantity);
-  });
-
+  if (req.body.status === "Shipped") {
+    order.orderItems.forEach(async (o) => {
+      await updateStock(o.product, o.quantity);
+    });
+  }
   order.orderStatus = req.body.status;
+
+  if (req.body.status === "Delivered") {
+    order.deliveredAt = Date.now();
+  }
 
   await order.save({ validateBeforeSave: false });
   res.status(200).json({

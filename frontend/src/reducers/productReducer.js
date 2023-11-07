@@ -38,7 +38,6 @@ import { createSlice } from "@reduxjs/toolkit";
 export const gitProduct = (state = { product: [] }, action) => {
   switch (action.type) {
     case ALL_PRODUCT_REQUEST:
-    case ADMIN_PRODUCT_REQUEST:
       return {
         loading: true,
         product: [],
@@ -52,12 +51,35 @@ export const gitProduct = (state = { product: [] }, action) => {
         // filteredProductsCount: action.payload.filteredProductsCount,
       };
 
+    case ALL_PRODUCT_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+    default:
+      return state;
+  }
+};
+export const AdminProduct = (state = { products: [] }, action) => {
+  switch (action.type) {
+    case ADMIN_PRODUCT_REQUEST:
+      return {
+        loading: true,
+        products: [],
+      };
+
     case ADMIN_PRODUCT_SUCCESS:
       return {
         loading: false,
-        product: action.payload,
+        products: action.payload,
       };
-    case ALL_PRODUCT_FAIL:
+
     case ADMIN_PRODUCT_FAIL:
       return {
         loading: false,

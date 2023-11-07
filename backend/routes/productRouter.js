@@ -22,11 +22,13 @@ router
 router
   .route("/admin/products")
   .get(isAuthenticatedUser, authorizeRole("admin"), getAdminProducts);
+
+router.route("/product/:id").get(getProductDetails);
+
 router
-  .route("/product/:id")
-  .get(getProductDetails)
-  .put(isAuthenticatedUser, authorizeRole("admin"), updateProduct)
-  .delete(isAuthenticatedUser, authorizeRole("admin"), deleteProduct);
+  .route("/admin/product/:id")
+  .delete(isAuthenticatedUser, authorizeRole("admin"), deleteProduct)
+  .put(isAuthenticatedUser, authorizeRole("admin"), updateProduct);
 
 router.route("/review").put(isAuthenticatedUser, createProductReview);
 

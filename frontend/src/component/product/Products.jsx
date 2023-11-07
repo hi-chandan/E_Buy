@@ -20,7 +20,7 @@ const categories = [
 
 const Products = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [price, setPrice] = useState([0, 25000]);
+  const [price, setPrice] = useState([0, 60000]);
   const [category, setCategory] = useState("");
 
   const [ratings, setRatings] = useState(0);
@@ -52,7 +52,7 @@ const Products = () => {
           <div className="products">
             {product.product &&
               product.product.map((product) => (
-                <ProductCard product={product} />
+                <ProductCard product={product} key={product.id} />
               ))}
           </div>
 

@@ -1,6 +1,7 @@
 const catchAsyncErrors = require("../middleware/catchAsyncError");
-const dotenv = require("dotenv");
-dotenv.config({ path: "./config.env" });
+if (process.env.NODE_ENV !== "PRODUCTION") {
+  require("dotenv").config({ path: "./config.env" });
+}
 
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 

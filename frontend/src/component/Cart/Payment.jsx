@@ -23,7 +23,6 @@ const Payment = () => {
   const navigate = useNavigate();
   const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
 
-  console.log("this is order..", orderInfo);
   const dispatch = useDispatch();
   const alert = useAlert();
   const stripe = useStripe();

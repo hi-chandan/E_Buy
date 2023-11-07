@@ -122,32 +122,90 @@ export const userReducer = createSlice({
 
 // update user
 
-export const updateReducer = createSlice({
-  name: "userupdate",
-  initialState,
-  extraReducers: (builder) => {
-    builder.addCase(UPDATE_PROFILE_REQUEST, (state, action) => {
-      state.loading = true;
-    });
+export const updateReducer = (state = {}, action) => {
+  switch (action.type) {
+    case UPDATE_PROFILE_REQUEST:
+    case UPDATE_USER_REQUEST:
+    case DELETE_USER_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case UPDATE_PROFILE_SUCCESS:
+    case UPDATE_USER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        isUpdated: action.payload,
+      };
 
-    builder.addCase(UPDATE_PROFILE_SUCCESS, (state, action) => {
-      state.loading = false;
-      state.isUpdated = action.payload;
-      state.user = null;
-    });
-    builder.addCase(UPDATE_PROFILE_FAIL, (state, action) => {
-      state.loading = false;
-      state.error = action.error;
-    });
-    builder.addCase(UPDATE_PROFILE_RESET, (state, action) => {
-      state.isUpdated = false;
-    });
+    case DELETE_USER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        isDeleted: action.payload.success,
+        message: action.payload.message,
+      };
 
-    builder.addCase(CLEAR_ERRORS, (state) => {
-      state.error = null;
-    });
-  },
-});
+    case UPDATE_PROFILE_FAIL:
+    case UPDATE_USER_FAIL:
+    case DELETE_USER_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+
+    case UPDATE_PROFILE_RESET:
+    case UPDATE_USER_RESET:
+      return {
+        ...state,
+        isUpdated: false,
+      };
+
+    case DELETE_USER_RESET:
+      return {
+        ...state,
+        isDeleted: false,
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
+    default:
+      return state;
+  }
+};
+
+// export const updateReducer = createSlice({
+//   name: "userupdate",
+//   initialState,
+//   extraReducers: (builder) => {
+//     builder.addCase(UPDATE_PROFILE_REQUEST, (state, action) => {
+//       state.loading = true;
+//     });
+
+//     builder.addCase(UPDATE_PROFILE_SUCCESS, (state, action) => {
+//       state.loading = false;
+//       state.isUpdated = action.payload;
+//       state.user = null;
+//     });
+//     builder.addCase(UPDATE_PROFILE_FAIL, (state, action) => {
+//       state.loading = false;
+//       state.error = action.error;
+//     });
+//     builder.addCase(UPDATE_PROFILE_RESET, (state, action) => {
+//       state.isUpdated = false;
+//     });
+
+//     builder.addCase(CLEAR_ERRORS, (state) => {
+//       state.error = null;
+//     });
+//   },
+// });
 
 export const userPassword = createSlice({
   name: "userupdate",
@@ -230,6 +288,38 @@ export const allUsersReducer = (state = { users: [] }, action) => {
       };
 
     case ALL_USERS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const userDetailsReducer = (state = { user: {} }, action) => {
+  switch (action.type) {
+    case USER_DETAILS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case USER_DETAILS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        user: action.payload,
+      };
+
+    case USER_DETAILS_FAIL:
       return {
         ...state,
         loading: false,

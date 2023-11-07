@@ -77,7 +77,9 @@ exports.forgotPassword = catchAsyncError(async (req, res, next) => {
   const resetToken = user.getResetPasswordToken();
   await user.save({ validateBeforeSave: false });
 
-  const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
+  const resetPasswordUrl = `${req.protocol}://${req.get(
+    "host"
+  )}/password/reset/${resetToken}`;
 
   const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\n if you have not requested this email then, please ignore it`;
 
@@ -271,6 +273,9 @@ exports.deleteUser = catchAsyncError(async (req, res, next) => {
       message: "user don't exit",
     });
   }
+  const imageId = user.avatar.public_id;
+
+  await cloudinary.v2.uploader.destroy(imageId);
 
   await User.findByIdAndDelete(user);
 

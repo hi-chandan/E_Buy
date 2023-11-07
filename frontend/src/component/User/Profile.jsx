@@ -14,8 +14,6 @@ const Profile = () => {
     }
   );
 
-  console.log("userimage...", isAuthenticated);
-
   useEffect(() => {
     if (isAuthenticated === false) {
       navigate("/login");

@@ -6,6 +6,8 @@ import {
   FaYoutubeSquare,
 } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { GoListOrdered } from "react-icons/go";
+
 import logo from "../../../assets/react.svg";
 import { NavLink } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -100,7 +102,7 @@ const Header = () => {
             </li>
             <li>
               <NavLink to="/orders">
-                <FaYoutubeSquare size={30} className="youtube" />
+                <GoListOrdered size={30} className="youtube" />
               </NavLink>
             </li>
           </ul>

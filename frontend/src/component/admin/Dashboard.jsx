@@ -13,15 +13,15 @@ import Chart from "chart.js/auto";
 const Dashboard = () => {
   const dispatch = useDispatch();
 
-  const { product } = useSelector((state) => state.products);
   const { orders } = useSelector((state) => state.allOrders);
+  const { products } = useSelector((state) => state.Adminitem);
 
   const { users } = useSelector((state) => state.allUsers);
 
   let outOfStock = 0;
 
-  product &&
-    product.forEach((item) => {
+  products &&
+    products.forEach((item) => {
       if (item.Stock === 0) {
         outOfStock += 1;
       }
@@ -57,11 +57,10 @@ const Dashboard = () => {
       {
         backgroundColor: ["#00A6B4", "#6800B4"],
         hoverBackgroundColor: ["#4B5000", "#35014F"],
-        data: [outOfStock, product.length - outOfStock],
+        data: [outOfStock, (products || []).length - outOfStock],
       },
     ],
   };
-
   return (
     <div className="dashboard">
       <MetaData title="Dashboard - Admin Panel" />
@@ -79,7 +78,7 @@ const Dashboard = () => {
           <div className="dashboardSummaryBox2">
             <Link to="/admin/products">
               <p>Product</p>
-              <p>{product && product.length}</p>
+              <p>{products && products.length}</p>
             </Link>
             <Link to="/admin/orders">
               <p>Orders</p>

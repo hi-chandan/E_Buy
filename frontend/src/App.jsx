@@ -30,6 +30,13 @@ import ProtectedRoute from "./component/Routers/ProtectRouts";
 import OrderDetails from "./component/Order/OrderDetails.jsx";
 import Dashboard from "./component/admin/Dashboard.jsx";
 import NewProduct from "./component/admin/NewProduct";
+import ProductList from "./component/admin/ProductList";
+import UpdateProduct from "./component/admin/UpdateProduct";
+import OrderList from "./component/admin/OrderList";
+import ProcessOrder from "./component/admin/ProcessOrder";
+import UsersList from "./component/admin/UserList.jsx";
+import UpdateUser from "./component/admin/UpdateUser.jsx";
+import NotFound from "./component/layout/Nofound/Notfound.jsx";
 function App() {
   const { isAuthenticated, user } = useSelector((state) => {
     return state.user;
@@ -38,7 +45,6 @@ function App() {
 
   async function getStripeApiKey() {
     const { data } = await axios.get("/api/v1/stripeapikey");
-    console.log("data...strip..", data);
     setStripeApiKey(data.stripeApiKey);
   }
 
@@ -56,6 +62,12 @@ function App() {
         <Route extact path="/" Component={Home} />
         <Route extact path="/product/:id" Component={ProductDetails} />
         <Route extact path="/products" Component={Products} />
+        <Route path="/password/forgot" Component={ForgotPassword} />
+        <Route path="/products/:keyword" Component={Products} />
+        <Route path="/password/reset/:token" Component={ResetPassword} />
+        <Route path="/login" Component={LoginSignUp} />
+        <Route path="/search" Component={Search} />
+        <Route path="/cart" Component={Cart} />
         <Route path="/account" element={<ProtectAPI Component={Profile} />} />
         <Route
           path="/me/update"
@@ -65,12 +77,6 @@ function App() {
           path="/password/update"
           element={<ProtectAPI Component={UpdatePassword} />}
         />
-        <Route path="/password/forgot" Component={ForgotPassword} />
-        <Route path="/products/:keyword" Component={Products} />
-        <Route path="/password/reset/:token" Component={ResetPassword} />
-        <Route path="/login" Component={LoginSignUp} />
-        <Route path="/search" Component={Search} />
-        <Route path="/cart" Component={Cart} />
         <Route
           path="/login/shipping"
           element={<ProtectAPI Component={Shipping} />}
@@ -83,12 +89,22 @@ function App() {
           path="/success"
           element={<ProtectAPI Component={OrderSuccess} />}
         />
+        <Route extact path="/orders" element={<Myorders />} />
+        <Route extact path="/orders/:id" element={<OrderDetails />} />
         <Route element={<ProtectedRoute />}>
-          <Route extact path="/orders" element={<Myorders />} />
-          <Route extact path="/orders/:id" element={<OrderDetails />} />
+          <Route extact path="/admin/dashboard" element={<Dashboard />} />
+          <Route extact path="/admin/product" element={<NewProduct />} />
+          <Route extact path="/admin/products" element={<ProductList />} />
+          <Route
+            extact
+            path="/admin/product/:url"
+            element={<UpdateProduct />}
+          />
+          <Route extact path="/admin/orders" element={<OrderList />} />
+          <Route extact path="/admin/order/:id" element={<ProcessOrder />} />
+          <Route extact path="/admin/users" element={<UsersList />} />
+          <Route extact path="/admin/user/:id" element={<UpdateUser />} />
         </Route>
-        <Route extact path="/admin/dashboard" element={<Dashboard />} />
-        <Route extact path="/admin/product" element={<NewProduct />} />
         {stripeApiKey && (
           <Route
             path="/process/payment"
@@ -99,7 +115,10 @@ function App() {
             }
           />
         )}
-        // Testing the protected router // finish the test
+
+        {/* page not found or wrong url */}
+
+        <Route path="*" Component={NotFound} />
       </Routes>
       <Footer />
     </>

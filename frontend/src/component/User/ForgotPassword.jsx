@@ -16,7 +16,6 @@ const ForgotPassword = () => {
   const { error, success, loading } = useSelector((state) => {
     return state.forgotpassword;
   });
-  console.log("this is error in forgotpassword..", error);
 
   const [email, setEmail] = useState("");
 

@@ -5,6 +5,8 @@ import {
   gitProduct,
   newProductReducer,
   newReviewReducer,
+  productReducer,
+  AdminProduct,
 } from "./reducers/productReducer";
 import {
   resetPasswordReducer,
@@ -14,6 +16,7 @@ import {
   // userLoader,
   // userLogout,
   userReducer,
+  userDetailsReducer,
   // userRegister,
 } from "./reducers/userReducer";
 import { cartReducer } from "./reducers/cartReducer";
@@ -30,7 +33,7 @@ const reducer = {
   products: gitProduct,
   productDetail: ProductdetailsReducer.reducer,
   user: userReducer.reducer,
-  profile: updateReducer.reducer,
+  profile: updateReducer,
   password: userPassword.reducer,
   forgotpassword: resetPasswordReducer.reducer,
   cart: cartReducer,
@@ -42,9 +45,10 @@ const reducer = {
   newReview: newReviewReducer,
   allUsers: allUsersReducer,
   newProduct: newProductReducer,
-
-  // userLoader: userLoader.reducer,
-  // userLogout: userLogout.reducer,
+  product: productReducer,
+  order: orderReducer,
+  Adminitem: AdminProduct,
+  userDetails: userDetailsReducer,
 };
 
 let initialState = {
