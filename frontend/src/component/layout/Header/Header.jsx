@@ -68,12 +68,7 @@ const Header = () => {
             <li>
               <NavLink to="/products">products</NavLink>
             </li>
-            <li>
-              <NavLink to="/service">services</NavLink>
-            </li>
-            <li>
-              <NavLink to="/contact">contact</NavLink>
-            </li>
+
             <form class="d-flex " role="search" onSubmit={searchSubmitHandler}>
               <input
                 class="form-control me-2"
@@ -84,6 +79,9 @@ const Header = () => {
               />
               <input type="submit" value="Search" className="btn btn-primary" />
             </form>
+            <li>
+              <NavLink to="/contact">contact</NavLink>
+            </li>
           </ul>
         </div>
 

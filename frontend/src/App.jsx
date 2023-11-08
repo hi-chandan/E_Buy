@@ -37,6 +37,7 @@ import ProcessOrder from "./component/admin/ProcessOrder";
 import UsersList from "./component/admin/UserList.jsx";
 import UpdateUser from "./component/admin/UpdateUser.jsx";
 import NotFound from "./component/layout/Nofound/Notfound.jsx";
+import Connect from "./component/Connect/Connect.jsx";
 function App() {
   const { isAuthenticated, user } = useSelector((state) => {
     return state.user;
@@ -62,6 +63,7 @@ function App() {
         <Route extact path="/" Component={Home} />
         <Route extact path="/product/:id" Component={ProductDetails} />
         <Route extact path="/products" Component={Products} />
+        <Route extact path="/contact" Component={Connect} />
         <Route path="/password/forgot" Component={ForgotPassword} />
         <Route path="/products/:keyword" Component={Products} />
         <Route path="/password/reset/:token" Component={ResetPassword} />

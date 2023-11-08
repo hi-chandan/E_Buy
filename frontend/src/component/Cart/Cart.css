@@ -184,3 +184,9 @@
     font: 300 2vmax "Roboto";
   }
 }
+
+.forminput{
+  width: 80vmax;
+  height: 100%;
+font-size: 1.2vmax;
+}
