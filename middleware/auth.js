@@ -7,7 +7,7 @@ exports.isAuthenticatedUser = catchAsyncError(async (req, res, next) => {
   if (!token) {
     return res.status(401).json({
       sucess: false,
-      message: "token is not provided",
+      message: "User Not Login please Login",
     });
   }
   const decodeData = jwt.verify(token, process.env.JWT_SECRET);

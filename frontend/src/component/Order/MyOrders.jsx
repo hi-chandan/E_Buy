@@ -9,9 +9,10 @@ import { useAlert } from "react-alert";
 import Typography from "@material-ui/core/Typography";
 import MetaData from "../layout/MetaData";
 import LaunchIcon from "@material-ui/icons/Launch";
+import { useNavigate } from "react-router-dom";
 const MyOrders = () => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const alert = useAlert();
 
   const { loading, error, orders } = useSelector((state) => state.myOrders);
@@ -76,6 +77,7 @@ const MyOrders = () => {
   useEffect(() => {
     if (error) {
       alert.error(error);
+      navigate("/login");
       dispatch(clearErrors());
     }
 
