@@ -10,6 +10,8 @@ import { login, register, clearErrors } from "../../actions/userAction";
 import { useAlert } from "react-alert";
 import { useNavigate, useLocation } from "react-router-dom";
 import MetaData from "../layout/MetaData";
+import { useFormik } from "formik";
+import { signupSchema } from "./userValidation";
 const LoginSignUp = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -27,14 +29,6 @@ const LoginSignUp = () => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
-  const [user, setUser] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
-
-  const { name, email, password } = user;
-
   const [avatar, setAvatar] = useState("/user.png");
   const [avatarPreview, setAvatarPreview] = useState("/user.png");
 
@@ -43,33 +37,30 @@ const LoginSignUp = () => {
     dispatch(login(loginEmail, loginPassword));
   };
 
-  const registerSubmit = (e) => {
-    e.preventDefault();
-    const myForm = new FormData();
-
-    myForm.set("name", name);
-    myForm.set("email", email);
-    myForm.set("password", password);
-    myForm.set("avatar", avatar);
-    dispatch(register(myForm));
+  const initialvalues = {
+    name: "",
+    email: "",
+    password: "",
+    avatar: "",
   };
 
-  const registerDataChange = (e) => {
-    if (e.target.name === "avatar") {
-      const reader = new FileReader();
+  const {
+    values,
+    errors,
+    handleChange,
+    setFieldValue,
+    touched,
+    handleBlur,
+    handleSubmit,
+  } = useFormik({
+    initialValues: initialvalues,
+    validationSchema: signupSchema,
+    onSubmit: (values) => {
+      dispatch(register(values));
+    },
 
-      reader.onload = () => {
-        if (reader.readyState === 2) {
-          setAvatarPreview(reader.result);
-          setAvatar(reader.result);
-        }
-      };
-
-      reader.readAsDataURL(e.target.files[0]);
-    } else {
-      setUser({ ...user, [e.target.name]: e.target.value });
-    }
-  };
+    // Dispatch your action or perform other logic here
+  });
 
   const redirect = location.search ? location.search.split("=")[1] : "/account";
   useEffect(() => {
@@ -83,6 +74,9 @@ const LoginSignUp = () => {
     }
   }, [dispatch, error, alert, isAuthenticated, redirect]);
 
+  const registersubmit = (e) => {
+    e.preventDefault();
+  };
   const switchTabs = (e, tab) => {
     if (tab === "login") {
       switcherTab.current.classList.add("shiftToNeutral");
@@ -139,8 +133,10 @@ const LoginSignUp = () => {
           <form
             className="signUpForm"
             ref={registerTab}
+            // encType="multipart/form-data"
+            // onSubmit={registerSubmit}
+            onSubmit={handleSubmit}
             encType="multipart/form-data"
-            onSubmit={registerSubmit}
           >
             <div className="signUpName">
               <FaceIcon />
@@ -149,10 +145,15 @@ const LoginSignUp = () => {
                 placeholder="Name"
                 required
                 name="name"
-                value={name}
-                onChange={registerDataChange}
+                value={values.name}
+                onChange={handleChange}
+                onBlur={handleBlur}
               />
             </div>
+            {errors.name && touched.name ? (
+              <p className="fromerror">{errors.name}</p>
+            ) : null}
+
             <div className="signUpEmail">
               <MailOutlineIcon />
               <input
@@ -160,10 +161,16 @@ const LoginSignUp = () => {
                 placeholder="Email"
                 required
                 name="email"
-                value={email}
-                onChange={registerDataChange}
+                value={values.email}
+                // onChange={registerDataChange}
+                onChange={handleChange}
+                onBlur={handleBlur}
               />
             </div>
+            {errors.email && touched.email ? (
+              <p className="fromerror">{errors.email}</p>
+            ) : null}
+
             <div className="signUpPassword">
               <LockOpenIcon />
               <input
@@ -171,21 +178,36 @@ const LoginSignUp = () => {
                 placeholder="Password"
                 required
                 name="password"
-                value={password}
-                onChange={registerDataChange}
+                value={values.password}
+                // onChange={registerDataChange}
+                onChange={handleChange}
+                onBlur={handleBlur}
               />
             </div>
-
+            {errors.password && touched.password ? (
+              <p className="fromerror">{errors.password}</p>
+            ) : null}
             <div id="registerImage">
-              <img src={avatarPreview} alt="Avatar Preview" />
+              <img src={avatar} alt="avatar " />
               <input
                 type="file"
                 name="avatar"
                 accept="image/*"
-                onChange={registerDataChange}
+                onChange={(e) => {
+                  let reader = new FileReader();
+                  reader.onload = () => {
+                    if (reader.readyState === 2) {
+                      setFieldValue("avatar", reader.result);
+                      setAvatar(reader.result);
+                    }
+                  };
+                  reader.readAsDataURL(e.target.files[0]);
+                }}
+                onBlur={handleBlur}
               />
             </div>
-            <p>{error}</p>
+            {<p className="fromerror">{errors.avatar}</p>}
+
             <input type="submit" value="Register" className="signUpBtn" />
           </form>
         </div>

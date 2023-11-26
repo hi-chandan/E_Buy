@@ -23,7 +23,6 @@ exports.registerUser = catchAsyncError(async (req, res, next) => {
   });
   sendtoken(user, 201, res);
 });
-
 // Login user
 
 exports.loginUser = catchAsyncError(async (req, res, next) => {

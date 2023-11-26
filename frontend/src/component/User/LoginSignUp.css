@@ -50,7 +50,7 @@
 .signUpForm {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   margin: auto;
   padding: 2vmax;
   justify-content: space-evenly;
@@ -218,4 +218,11 @@
     font: 300 1.9vmax "Roboto";
     padding: 1.8vmax;
   }
+}
+
+.fromerror{
+  color: red;
+
+ font-size: 14px;
+
 }
